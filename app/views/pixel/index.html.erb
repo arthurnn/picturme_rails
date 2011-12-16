@@ -1,0 +1,29 @@
+<%= content_for :body_att do %>
+	data-controller="home"
+<% end %>
+<div id="upload_container">
+    <h1><a href="/">pictur.me</a></h1>
+    <p>upload your picture and get an awesome mosaic from <a href="http://500px.com">500px</a> images</p>
+	<%= form_tag({:action => :upload}, :multipart => true, :id=> 'uploadform') do |f| %>
+		<div><%= file_field_tag 'file' %></div>
+	  	<br />
+	  	<div> <%= submit_tag("beam me up scotty!",:class=>'btn primary')  %> </div>
+	    <br />
+		<div class="alert-message error hide">
+		    <a class="close" href="#">×</a>
+		    <p><strong>Oho!</strong> Please select an image to upload!</p>
+		</div>
+	<% end %>
+
+    <br />
+	<div class="sub">
+		<%= image_tag "rails.png" %>
+	  <h3>Ruby</h1>
+	</div>
+</div>     
+    
+<div id="load_container" style="display: none;">
+	<h1 id="loader">...</h1>
+	<p>your picture is being uploaded and generated. Please be patient, this can take a while...</p>
+	
+</div>

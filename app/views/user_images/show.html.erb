@@ -1,0 +1,46 @@
+<%= content_for :body_att do %>
+	data-controller="display" data-action="zoomTiles"
+<% end %>
+
+
+<h1><a href="/">pictur.me</a></h1>
+<section>
+    <div class="show-grid row">
+        <div class="span">
+            <p>Here's the resulting mosaic! Do you like it?</p>
+            <details open>
+                <summary>Yes!</summary>
+                <p>Share this via email or IM by copying the following URL: <input type="text" id="detail-url" value="{{short_url}}" /> or directly share to: <a href="https://twitter.com/share" class="share-tw" title="Twitter">Twitter</a> and <a href="#" class="share-fb">Facebook</a></p>
+            </details>
+            <details>
+                <summary>No!</summary>
+                <p>Well that's sad but why don't you give it another try? <a href="/">retry!</a></p>
+            </details>
+        </div>
+    </div>
+    <br />
+    <div class="show-grid row">
+        <div class="span5 offset9">
+            <p>These are the tiles from <a href="//500px.com">500px</a>:</p> 
+        </div>
+    </div>
+    <div class="show-grid row">
+        <!-- LEFT SIDE -->
+        <div class="span9">
+            <div id="picture" class="zoom" data-picture-id="1" data-picture-large="<%= @user_image.image.url %>" data-picture-large-w="<%= @user_image.image_magic.columns %>px" data-picture-large-h="<%= @user_image.image_magic.rows %>px">
+                <div class="small">
+                    <img id="zoom" src="<%= @user_image.image.thumb.url %>" alt="" style="height:<%= @user_image.thumb_magic.rows %>px;width:<%= @user_image.thumb_magic.columns %>px;" />
+                </div>
+                <div class="large hide">
+                </div>
+            </div>
+            <div>
+                <a href="<%= @user_image.image.url %>">Full size image</a>
+            </div>
+        </div>
+        <!-- RIGHT SIDE -->
+        <div class="span5 sidebar" id="thumbs_list">
+        </div>
+    </div>
+
+</section>

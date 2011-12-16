@@ -1,0 +1,53 @@
+* {
+    text-transform: lowercase;
+}
+.container {
+    margin: 30px auto 0;
+}
+summary{
+    display:block;
+    font-size: 18px;
+}
+footer {
+    display: block;
+    margin: 0 0 20px;
+}
+.hero-unit h1{
+    margin: 0 0 18px;
+}
+.zoom {
+    width: 500px;
+}
+.small img {
+    width: 500px;
+}
+.large img {
+    width: auto;
+    background: white; 
+}
+.pagination ul{
+    width: 100%;
+}
+.pagination ul li a {
+    font-size: 13px;
+    line-height: 20px;
+    padding: 0 4px;
+}
+.pagination ul li strong {
+    float: left;
+}
+#metadata-container {
+    padding-bottom: 0;
+}
+#picture {
+    width: 500px;
+}
+
+.home-grid .thumbnail {
+	height: 100px;
+}
+.alert-message p {
+    margin-bottom: 0;
+    font-size: 14px;
+    line-height: 15px;
+}
