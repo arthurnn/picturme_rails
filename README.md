@@ -19,3 +19,7 @@ Authors
 @arthurnn89
 
 
+Special thanks for "MagLev Engineering Team" for the KD-tree implementation.
+https://github.com/MagLev/maglev/tree/master/examples/persistence/kdtree/
+
+
