@@ -6,8 +6,8 @@ class PixelController < ApplicationController
   
   def upload
     @points = []
-    Pixel.all.each { |p|
-      @points << Collections::PointKD.new([p.r,p.g,p.b],Magick::ImageList.new("#{Rails.public_path}/#{p.image1}"))
+    Pixel.limit(1000).each { |p|
+      @points << Collections::PointKD.new([p.r,p.g,p.b],p)
     }
     
     @tree = Collections::TreeKD.new(@points,3)
@@ -33,8 +33,7 @@ class PixelController < ApplicationController
         crop = img.crop(x*wi,y*hi,wi,hi)
         
         avg = average(crop)
-        nimg = @tree.nearest(Collections::PointKD.new(avg)).value.data
-        
+        nimg = @tree.nearest(Collections::PointKD.new(avg)).value.data.image
         b << nimg.scale(0.5) # thumbnail = 140, so 140*0.5 = 70
         page.x = x * b.rows
         page.y = y * b.columns

@@ -1,5 +1,8 @@
 class Pixel < ActiveRecord::Base
-  def self.image(npath)
-    @_image ||= Magick::ImageList.new("#{Rails.public_path}/#{npath}")
+  mount_uploader :image1, TileUploader
+  
+  def image
+    @image ||= Magick::ImageList.new(image1)
   end
+  
 end
