@@ -5,6 +5,7 @@ class PixelController < ApplicationController
   end
   
   def upload
+    # TODO : this should be moved to a singleton, indeed !
     @points = []
     Pixel.limit(1000).each { |p|
       @points << Collections::PointKD.new([p.r,p.g,p.b],p)
@@ -30,23 +31,32 @@ class PixelController < ApplicationController
     
     w.times { |x|
       h.times{ |y|
+        #crop the input image 
         crop = img.crop(x*wi,y*hi,wi,hi)
         
+        # get the avarage RGB in it
         avg = average(crop)
+        
+        # get the nearst node from the avg rgb
         nimg = @tree.nearest(Collections::PointKD.new(avg)).value.data.image
+        
+        # scale it to half size
         b << nimg.scale(0.5) # thumbnail = 140, so 140*0.5 = 70
+        # create a new page(rectangle) for the mosaic generation
         page.x = x * b.rows
         page.y = y * b.columns
         b.page = page
         
       }
     }
-    
+    # generate the proper mosaic
     mosaic = b.mosaic
+    # save it in a tmp folder
     mos_filename = Digest::MD5.hexdigest(mosaic.to_blob)
     f = File.new("#{Rails.root.join('tmp')}/#{mos_filename}.jpg","w+")
     mosaic.write(f)
     
+    # create the db entry for hold the image
     @user_image = UserImage.new
     @user_image.image = f
     @user_image.save!
@@ -55,7 +65,9 @@ class PixelController < ApplicationController
     
   end
   
- def average(img)
+  protected
+  
+  def average(img)
     total = 0
     avg   = { :r => 0.0, :g => 0.0, :b => 0.0 }
     img.quantize.color_histogram.each { |c, n|
