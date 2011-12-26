@@ -7,7 +7,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" prefix="og: http://ogp.me/ns#"> <!--<![endif]-->
 <head>
   <title>PicturmeRails</title>
-  <%= stylesheet_link_tag    "bootstrap.min","custom", "media-queries","anythingzoomer"%>
+  <%= stylesheet_link_tag    "application" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
   
@@ -21,7 +21,7 @@
   
 </head>
 
-<body <%= yield :body_att %> >
+<body data-controller="<%= params[:controller].parameterize %>" >
 	<div class="container">
 	    <div class="hero-unit">
 			<%= yield %>
