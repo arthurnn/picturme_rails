@@ -19,15 +19,21 @@ class PixelController < ApplicationController
     img = Magick::ImageList.new
     img.from_blob(uploaded_io.read)
     
-    # w(70)*tile_width(70) = 4900
+    # formula is -> w(70)*tile_width(70) = 4900
     w = 70
+    # calculate the ralative h depending the ratio
     h = (w*img.rows)/img.columns
 
+    # get the number of tiles for width and height
     wi = img.columns / w
     hi = img.rows / h
     
-    page = Magick::Rectangle.new(0,0,0,0)
+    
+    # final image (result)
     b = Magick::ImageList.new
+    
+    # create a new page for the mosaic generation
+    page = Magick::Rectangle.new(0,0,0,0)
     
     w.times { |x|
       h.times{ |y|
@@ -56,7 +62,7 @@ class PixelController < ApplicationController
     f = File.new("#{Rails.root.join('tmp')}/#{mos_filename}.jpg","w+")
     mosaic.write(f)
     
-    # create the db entry for hold the image
+    # create the db entry to hold the image
     @user_image = UserImage.new
     @user_image.image = f
     @user_image.save!
