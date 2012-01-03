@@ -10,7 +10,7 @@ Instructions
 
 * bundle install
 * mysqladmin -uroot -proot create picturme_db
-* rake db:migration
+* rake db:migrate
 * mysql -uroot -proot picturme_db < db/dump.sql
 * rails server
 
