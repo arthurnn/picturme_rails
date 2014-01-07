@@ -16,7 +16,7 @@ Instructions
 
 Authors
 -------
-@arthurnn89
+@arthurnn
 
 
 Special thanks for "MagLev Engineering Team" for the KD-tree implementation.
